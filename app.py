@@ -1,20 +1,8 @@
-from flask import Flask
-import pytest
-from flask_sqlalchemy import SQLAlchemy
+from website import create_app
+from website import views
 
-app = Flask(__name__)
-app.app_context()
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'     
-db = SQLAlchemy(app)
+app = create_app()
 
-class Car(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    brand = db.Column(db.String(30), nullable = False)
-    model = db.Column(db.String(30), nullable = False)
+if __name__ == '__main__':
     
-    def __repr__(self):
-        return f"{self.brand} {self.model}"
-
-@app.route('/')
-def index():
-    return "hello world"
+    app.run(debug=True, port=8000)

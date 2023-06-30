@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href = "/">show cars</a>
+<form method="post">
+    <input name = brand placeholder="brand" type = text><br>
+    <input name = model placeholder="model"type = text><br>
+    <input name = odo placeholder="odo" type = number><br>
+    <input name = unit placeholder="unit" type = text>
+    <button type="submit">Add</button>
+</form>
+{% endblock %}

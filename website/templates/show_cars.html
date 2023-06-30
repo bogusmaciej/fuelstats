@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a href = "/add_car">add car</a>
+<div class="car">
+    {% for car in cars %}
+    <div>{{ car }}</div>
+    <form method="POST">
+        <button name = "car_id" value = {{ car.id }}>Delete</button>
+    </form>
+    
+    {% endfor %}
+</div>
+{% endblock %}
