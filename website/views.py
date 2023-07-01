@@ -1,34 +1,51 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify
 from .db_models import Car, Refuel
 from . import db
+import json
 from flask import request
 
 views = Blueprint("views", __name__)
 
 @views.route("/", methods = ['POST', 'GET'])
 def index():
-    # new_car= Car(brand='Opel', model='Corsa', init_odo=12345, current_odo='', odo_unit='km')
-    # db.session.add(new_car)
-    # db.session.commit()
-    cars = Car.query.all()
+    if Car:
+        cars = Car.query.all()
     if request.method == "POST":
-        id = request.form["car_id"]
-        Car.query.filter_by(id=id).delete()
+        id_ = request.form["car_id"]
+        Car.query.filter_by(id=id_).delete(synchronize_session='fetch')
         db.session.commit()
+        
     return render_template("show_cars.html", cars = cars)
 
 @views.route("/add_car", methods = ['POST', 'GET'])
 def add():
     if request.method == "POST":
-        
         brand_ = request.form['brand']
         model_ = request.form['model']
         odo_ = request.form['odo']
         unit_ = request.form['unit']
-        
-        
+        # if brand_ and model_ and odo_ and unit_:
         new_car = Car(brand = brand_, model = model_, init_odo = odo_, current_odo=odo_, odo_unit = unit_)
         db.session.add(new_car)
         db.session.commit()
+            
         
     return render_template("add_car.html")
+
+@views.route('/delete-car', methods=['POST'])
+def delete_note():  
+    car = json.loads(request.data)
+    carId = car['car_id']
+    car = Car.query.get(carId)
+    if car:
+        db.session.delete(car)
+        db.session.commit()
+
+    return jsonify({})
+
+@views.route('/car/<car_id>', methods=['GET', 'POST'])
+def car_menage(car_id):
+    car = Car.query.get(car_id)
+    if(car):
+        return render_template("car_menage.html", car = car)
+    else: return render_template('404.html')
