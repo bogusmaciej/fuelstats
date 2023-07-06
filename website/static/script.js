@@ -6,3 +6,9 @@ function delCar(id){
         window.location.href = "/";
     });
 }
+
+function getCars(){
+    return fetch("/api/cars")
+    .then(response => response.json())
+    .catch((error) => console.log(error))
+};

@@ -8,14 +8,7 @@ views = Blueprint("views", __name__)
 
 @views.route("/", methods = ['POST', 'GET'])
 def index():
-    if Car:
-        cars = Car.query.all()
-    if request.method == "POST":
-        id_ = request.form["car_id"]
-        Car.query.filter_by(id=id_).delete(synchronize_session='fetch')
-        db.session.commit()
-        
-    return render_template("show_cars.html", cars = cars)
+    return render_template("show_cars.html")
 
 @views.route("/add_car", methods = ['POST', 'GET'])
 def add():
@@ -33,7 +26,7 @@ def add():
     return render_template("add_car.html")
 
 @views.route('/delete-car', methods=['POST'])
-def delete_note():  
+def delete_car():  
     car = json.loads(request.data)
     carId = car['car_id']
     car = Car.query.get(carId)
@@ -49,3 +42,22 @@ def car_menage(car_id):
     if(car):
         return render_template("car_menage.html", car = car)
     else: return render_template('404.html')
+    
+@views.route('/api/<type>', methods=['GET', 'POST'])
+def cars_api(type):
+    if type == 'cars':
+        cars = []
+        
+        for car in db.session.query(Car).all():
+            new_car = {
+                'id' : car.id,
+                'brand' : car.brand,
+                'model' : car.model,
+                'init_odo' : car.init_odo,
+                'current_odo' : car.current_odo,
+                'units' : car.odo_unit,
+            }
+            
+            cars.append(new_car.copy())
+        
+        return {'cars' : cars}

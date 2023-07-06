@@ -2,7 +2,11 @@
 
 {% block content %}
 <a href = "/add_car">add car</a>
-<div class="car">
+
+<div id="cars">
+</div>
+
+{# <div class="car">
 
     {% if cars %}
     <form method="POST">
@@ -23,5 +27,5 @@
     <h1>You don't have any cars</h1>
     {% endif %}
 
-</div>
+</div> #}
 {% endblock %}
