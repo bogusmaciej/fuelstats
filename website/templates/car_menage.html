@@ -2,7 +2,11 @@
 
 {% block content %}
 <a href = "/">return</a>
-<div class="car">
-    {{ car }}
+<div class="car_menagement_content">
+    <div class="car_menagement_div">
+        <h1>{{car}}</h1>
+        <h2>{{car.current_odo}}{{car.odo_unit}}</h2>
+    </div>
 </div>
+
 {% endblock %}

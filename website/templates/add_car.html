@@ -2,15 +2,20 @@
 
 {% block content %}
 <a href = "/">show cars</a>
-<form method="post">
-    <input name = brand placeholder="brand" type = text><br>
-    <input name = model placeholder="model"type = text><br>
-    <input name = odo placeholder="odo" type = number><br>
-    <select name = unit>
+<div class="add_cars_content">
+  <div class = "add_form">
+    <form method="post">
+      <input name = brand placeholder="brand" type = text required><br>
+      <input name = model placeholder="model"type = text required><br>
+      <input name = odo placeholder="odo" type = number required><br>
+      <select name = unit required>
         <option selected disabled>Units</option>
-        <option value= km>Kilometers</option>
-        <option value = mi>Miles</option>
+        <option value= km required>Kilometers</option>
+        <option value = mi required>Miles</option>
       </select><br>
-    <button type="submit">Add</button>
-</form>
+      <button class= "add_car_btn" type="submit">Add</button>
+    </form>
+  </div>
+</div>
+
 {% endblock %}

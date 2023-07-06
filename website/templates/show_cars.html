@@ -2,30 +2,10 @@
 
 {% block content %}
 <a href = "/add_car">add car</a>
-
-<div id="cars">
+<div class="show_cars_content">
+    <div class="cars">
+    </div>
 </div>
 
-{# <div class="car">
 
-    {% if cars %}
-    <form method="POST">
-        <div class="container text-center">
-            <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    {% for car in cars %}
-        <a href="/car/{{ car.id }}">
-            <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-                <div>{{ car }}</div>
-                <button name = "car_id" onClick = "delCar({{ car.id }})">Delete</button>
-            </div>
-            </a>
-    {% endfor %}
-            </div>
-        </div>
-    </form>
-    {% else %}
-    <h1>You don't have any cars</h1>
-    {% endif %}
-
-</div> #}
 {% endblock %}

@@ -17,10 +17,10 @@ def add():
         model_ = request.form['model']
         odo_ = request.form['odo']
         unit_ = request.form['unit']
-        # if brand_ and model_ and odo_ and unit_:
-        new_car = Car(brand = brand_, model = model_, init_odo = odo_, current_odo=odo_, odo_unit = unit_)
-        db.session.add(new_car)
-        db.session.commit()
+        if brand_ and model_ and odo_ and unit_:
+            new_car = Car(brand = brand_, model = model_, init_odo = odo_, current_odo=odo_, odo_unit = unit_)
+            db.session.add(new_car)
+            db.session.commit()
             
         
     return render_template("add_car.html")
