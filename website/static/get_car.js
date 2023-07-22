@@ -8,7 +8,7 @@ function delCar(id){
 };
 
 async function getAllCars(){
-    const content_block = document.querySelector(".cars");
+    const content_block = document.querySelector("#cars_list");
     let content = "";
 
     await fetch("/api/cars", {
@@ -22,13 +22,16 @@ async function getAllCars(){
             for (let k in cars) {
                 car = cars[k];
                 content+=`
-                <a href = "car/${car.id}">
-                    <div class="car" id="car${car.id}">
-                        <h1>${car.brand} ${car.model}</h1>
-                        <h2>${car.current_odo}${car.units}</h2>
-                        <button class="del_btn" onclick = 'delCar(${car.id})'>DELETE</button>
-                    </div>
-                </a>`
+                <div class="col border car_col m-3">
+                    <a href = "car/${car.id}">
+                        <div id="car${car.id}">
+                            <h1>${car.brand} ${car.model}</h1>
+                            <h2>${car.current_odo}${car.units}</h2>
+                            
+                        </div>
+                    </a>
+                    <button class="del_btn" onclick = 'delCar(${car.id})'>DELETE</button>
+                </div>`
             }
         }
     })

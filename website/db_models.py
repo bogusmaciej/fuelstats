@@ -17,6 +17,7 @@ class Car(db.Model):
 class Refuel(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     car_id = db.Column(db.Integer, db.ForeignKey('car.id'))
+    refuel_odo = db.Column(db.Integer)
     date = db.Column(db.DateTime(timezone = True), default = func.now())
     price = db.Column(db.Integer)
     amount = db.Column(db.Integer)

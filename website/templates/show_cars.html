@@ -1,11 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <a href = "/add_car">add car</a>
-<div class="show_cars_content">
-    <div class="cars">
+<div class="container-lg text-center">
+    <div class="row row-cols-1 row-cols-lg-4 justify-content-center" id="cars_list">
     </div>
 </div>
 
-
+<!-- <style>
+    .car_col{
+        padding: 1rem;
+        margin: 30px;
+        box-sizing: border-box;
+    }
+</style> -->
+<script src=/static/get_cars.js></script>
 {% endblock %}
